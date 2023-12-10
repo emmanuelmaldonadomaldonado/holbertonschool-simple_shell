@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define my_args 100
 
@@ -15,6 +17,8 @@ int main(void)
 	size_t length;
 	char *path = "/usr/bin/";
 	char my_path[my_args];
+	int status;
+	pid_t pid;
 
 	while (1)
 	{
@@ -28,7 +32,8 @@ int main(void)
 			if (strcmp(command, "") == 0)
 				continue;
 
-			if (strcmp(command, "exit") == 0) {
+			if (strcmp(command, "exit") == 0)
+			{
 				free(command);
 				return 0;
 			}
@@ -54,9 +59,24 @@ int main(void)
 			strcpy(my_path, path);
 			strcat(my_path, argv[0]);
 
-			if (execve(my_path, argv, NULL) == -1)
+			pid = fork();
+			if (pid == -1)
 			{
-				printf("command not found\n");
+				perror("fork failed");
+				exit(EXIT_FAILURE);
+			}
+
+			if (pid == 0)
+			{
+				if (execve(my_path, argv, NULL) == -1)
+				{
+					printf("command not found\n");
+					exit(EXIT_FAILURE);
+				}
+			}
+			else
+			{
+				waitpid(pid, &status, 0);
 			}
 		}
 	}
