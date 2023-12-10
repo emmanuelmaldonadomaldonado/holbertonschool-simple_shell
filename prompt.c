@@ -1,15 +1,20 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
-int main (int argc, char *argv[])
+#define my_args 100
+
+int main(void)
 {
-	(void)argc;
+	int num_token, k;
+	char *argv[my_args];
 	char *command = NULL;
 	char *token;
 	size_t buffer = 0;
-	size_t length, i;
+	size_t length;
+	char *path = "/usr/bin/";
+	char my_path[my_args];
 
 	while (1)
 	{
@@ -17,34 +22,44 @@ int main (int argc, char *argv[])
 		if (getline(&command, &buffer, stdin) != -1)
 		{
 			length = strlen(command);
-			for (i = 0; i < length; i++)
-			{
-				if (command[i] == '\n')
-					command[i] = '\0';
-			}
-			if (strcmp(command, "exit") == 0)
-			{
+			if (command[length - 1] == '\n')
+				command[length - 1] = '\0';
+
+			if (strcmp(command, "") == 0)
+				continue;
+
+			if (strcmp(command, "exit") == 0) {
 				free(command);
-				return (0);
+				return 0;
 			}
+
+			num_token = 0;
 			token = strtok(command, " ");
-			while (token != NULL)
+			while (token != NULL && num_token < my_args - 1)
 			{
-				printf("%s\n", token);
+				argv[num_token++] = token;
 				token = strtok(NULL, " ");
 			}
-		}
-		else
-		{
-			break;
+			argv[num_token] = NULL;
+
+			if (num_token == 0)
+				continue;
+
+			for (k = 0; k < num_token; k++)
+			{
+				printf("%s ", argv[k]);
+			}
+			printf("\n");
+
+			strcpy(my_path, path);
+			strcat(my_path, argv[0]);
+
+			if (execve(my_path, argv, NULL) == -1)
+			{
+				printf("command not found\n");
+			}
 		}
 	}
-	while (*argv != NULL)
-	{
-		printf("%s ", *argv);
-		argv++;
-	}
-	printf("\n");
 	free(command);
-	return (0);
+	return 0;
 }
