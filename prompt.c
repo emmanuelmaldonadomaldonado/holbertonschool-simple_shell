@@ -412,6 +412,7 @@ int main(void)
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 #define my_args 100
 
@@ -459,13 +460,20 @@ int main(void)
 				continue;
 
 			for (k = 0; k < num_token; k++)
-			{
+			/*{
 				printf("%s ", argv[k]);
 			}
-			printf("\n");
-
+			printf("\n");*/
+			
 			strcpy(my_path, path);
 			strcat(my_path, argv[0]);
+			
+			if (access(my_path, X_OK) == -1)
+            		{
+                		/*perror("access");*/
+                		printf("Command not found or lack of execute permissions\n");
+                		continue;
+            		}
 
 			pid = fork();
 			if (pid == -1)
