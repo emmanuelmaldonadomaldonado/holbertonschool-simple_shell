@@ -1,0 +1,84 @@
+.TH MY_SIMPLE_SHELL 1 "December 2023" "Version 1.0" "User Commands"
+
+.SH NAME
+my_simple_shell \- a simple Unix shell program
+
+.SH SYNOPSIS
+\fBmy_simple_shell\fR
+
+.SH DESCRIPTION
+The \fBmy_simple_shell\fR program is a basic Unix shell that allows users to execute commands. It supports basic command-line operations, tokenizes input, and searches for executable commands in specified paths. The shell provides a simple interactive prompt and can also read commands from a file.
+
+.SH USAGE
+\fBmy_simple_shell\fR
+
+.SH COMMANDS
+
+.TP
+\fBcd [DIRECTORY]\fR - Change directory.
+
+.TP
+\fBpwd\fR - Print current directory.
+
+.TP
+\fBls [OPTIONS]\fR - List files and directories.
+
+.TP
+\fBecho [ARGUMENTS]\fR - Print arguments.
+
+.TP
+\fBCTRL-D\fR - Exit the shell.
+
+.TP
+\fBexit\fR
+Terminate the shell.
+
+.SH INTERACTIVE PROMPT
+The shell provides an interactive prompt when used in a terminal. The prompt displays a dollar sign ('$') followed by a space.
+
+.SH COMMAND EXECUTION
+The shell searches for executable commands in the following paths:
+
+.TP
+\fB/usr/local/bin/\fR
+.TP
+\fB/usr/bin/\fR
+.TP
+\fB/bin/\fR
+.TP
+\fB/usr/local/games/\fR
+.TP
+\fB/usr/games/\fR
+
+If the specified command is found and is executable, it is executed in a child process. The parent process waits for the child process to complete.
+
+.SH EXAMPLES
+.TP
+\fB1.\fR Run a command interactively:
+.BR $ ls -l
+
+.TP
+\fB2.\fR Execute a command from a file:
+.BR $ my_simple_shell < commands.txt
+
+.TP
+\fB3.\fR Terminate the shell:
+.BR $ exit
+
+.SH SEE ALSO
+.BR execve(2),
+.BR fork(2),
+.BR waitpid(2),
+.BR access(2)
+
+.SH AUTHOR
+This shell program were created by Louis S. Toro Rosario and Emmanuel Maldonado Maldonado
+
+.SH BUGS
+No bugs
+
+.SH COPYRIGHT
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+.SH SEE ALSO
+More information about the shell: https://github.com/emmanuelmaldonadomaldonado/holbertonschool-simple_shell
