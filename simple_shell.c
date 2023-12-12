@@ -31,12 +31,13 @@ char *_getenv(const char *name)
 }
 
 
-void imprimir_prompt()
+void imprimir_prompt(int interactive)
 {
-	if (isatty(fileno(stdin)))
+	if (interactive)
 	{
-		printf("$ ");
-		fflush(stdout);
+		char *dolar = "$";
+		printf("%s ", dolar);
+		/*fflush(stdout);*/
 	}
 }
 
@@ -56,9 +57,11 @@ int main(void)
 	char **env = environ; /*Copy of the environment variables*/
 	size_t path_size = sizeof(path) / sizeof(path[0]);
 
+	int interactive = isatty(fileno(stdin));
+
 	while (1)
 	{
-		imprimir_prompt();
+		imprimir_prompt(interactive);
 		if (getline(&command, &buffer, stdin) != -1) /*Read command from user input*/
 		{
 			length = strlen(command);
@@ -127,7 +130,11 @@ int main(void)
 		}
 		else /* If input is not read properly, break the loop */
 		{
-			printf("\n");
+			if (!interactive) /*Si no es interactivo, no imprimas una nueva línea*/
+			{
+				break;
+			}
+			printf("\n"); /* Si es interactivo y la entrada no se lee correctamente, imprime una nueva línea*/
 			break;
 		}
 	}
