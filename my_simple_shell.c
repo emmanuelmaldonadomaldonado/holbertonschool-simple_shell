@@ -29,11 +29,10 @@ int main(void)
 	int status;
 	pid_t pid;
 	char **env = environ; /*Copy of the environment variables*/
-	size_t path_size = sizeof(path) / sizeof(path[0]);
 
 	int interactive = isatty(fileno(stdin));
 
-	while (1)
+	while (1) /*interactive*/
 	{
 		imprimir_prompt(interactive);
 		if (getline(&command, &buffer, stdin) != -1) /*Read command from user input*/
@@ -66,14 +65,23 @@ int main(void)
 			for (k = 0; k < num_token; k++)
 				;
 
-			for (i = 0; i < path_size; i++)
+			if (access(argv[0], X_OK) == 0) /*Check if the command is executable*/
 			{
-				strcpy(my_path, path[i]); /*Construct the full path for the command*/
-				strcat(my_path, argv[0]);
-
-				if (access(my_path, X_OK) == 0) /*Check if the command is executable*/
+				for (i = 0; i < 5; i++)
 				{
+					execve(command, argv, env);
 					break;
+				}
+			}
+			else
+			{
+				for (i = 0; i < 5; i++)
+				{
+					strcpy(my_path, path[i]); /*Construct the full path for the command*/
+					strcat(my_path, argv[0]);
+
+					if (access(my_path, X_OK) == 0) /*Check if the command is executable*/
+						break;
 				}
 			}
 
