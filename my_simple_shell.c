@@ -90,6 +90,7 @@ int main(void)
 			if (!command_found)
 			{
 				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+				free(command);
 				exit (127);
 			}
 			pid = fork(); /* Fork a new process for command execution */
