@@ -89,8 +89,8 @@ int main(void)
 			/* If the command is not found, print an error and continue */
 			if (!command_found)
 			{
-				printf("Command not found\n");
-				return (main());
+				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);;
+				exit (127);
 			}
 			pid = fork(); /* Fork a new process for command execution */
 			if (pid == -1)
