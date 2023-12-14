@@ -90,7 +90,7 @@ int main(void)
 			if (!command_found)
 			{
 				printf("Command not found\n");
-				continue;
+				return (main());
 			}
 			pid = fork(); /* Fork a new process for command execution */
 			if (pid == -1)
