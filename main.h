@@ -14,5 +14,10 @@ extern char **environ;
 #define my_args 100
 
 char *_getenv(const char *name);
+void imprimir_prompt(int interactive);
+void execute_order_66(char *my_path, char **argv, char **environ);
+int tokenizer(char *command, char **argv);
+int i_path(char *command, char **argv, char **path, char *my_path);
+int main(void);
 
 #endif /* MAIN_H */
