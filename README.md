@@ -1,4 +1,3 @@
-
 # C - Simple Shell
 
 ## Table of Contents
@@ -9,37 +8,69 @@
 - [Examples](#examples)
 
 ## Overview
-
+The Simple Unix Shell is a basic command-line interface for Unix-like systems. It allows users to interact with the operating system by executing commands, managing directories, and utilizing essential shell functionalities.
 
 ## Features
 
+- **Interactive Prompt:** Provides an interactive command prompt for user input.
 
+- **Command Execution:** Executes system commands and external programs.
+
+- **Command Search:** Searches for commands in predefined paths.
+
+- **Command History:** Maintains a history of executed commands for reference.
+
+- **Built-in Commands:** Supports built-in commands such as `cd`, `exit`, `pwd`, `echo`, and `ls`.
+
+- **Environment Variables:** Enables manipulation of environment variables.
 
 ## Usage
 
+1. **Compilation:** Compile the program using a C compiler.
 
-
-```c
-
-
+```bash
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
 
+2. **Execution:** Run the shell.
 
-
-```c
+```bash
+./hsh
 ```
+3. **Interactive Commands:** Input commands in the interactive prompt.
+
+```bash
+$ ls -l
+```
+4. **Shell Termination:** To exit the shell, use the `exit` command.
 
 ## Examples
 
-
-
-```C
-
+- **List Files in Long Format:**
+```bash
+$ ls -l
 ```
-This will output:
+- **Change Directory:**
 
-```c
+```bash
+$ cd /path/to/directory
+```
+- **Print Current Directory:**
 
+```bash
+$ pwd
+```
+
+- **Echo Message:**
+
+```bash
+$ echo Hello, World
+```
+
+- **Exit the Shell:**
+
+```bash
+$ exit
 ```
 
 ## Authors
