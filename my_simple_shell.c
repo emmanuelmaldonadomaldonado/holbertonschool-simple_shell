@@ -1,5 +1,6 @@
 #include "main.h"
-/*
+/**
+ * main - simple shell
  */
 int main(void)
 {
@@ -34,7 +35,7 @@ int main(void)
 			command_found = i_path(argv[0], path, my_path);
 			if (!command_found) /* If the command is not found, print an error and exit */
 			{
-				fprintf(stderr, "./hsh: 1: %s: no se encontró\n", argv[0]);
+				fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 				free(command);
 				exit(127);
 			}

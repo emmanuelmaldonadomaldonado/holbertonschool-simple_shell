@@ -1,6 +1,11 @@
 #include "main.h"
-/*
+/**
+ * i_path - function aims to find the full path of an executable file
+ * @command: Input command string
+ * @path: Default path for command execution
+ * @my_path: Store the constructed path for command execution
  *
+ * Return: returns 1 if the command is found and executable
  */
 int i_path(char *command, char **path, char *my_path)
 {
@@ -25,5 +30,5 @@ int i_path(char *command, char **path, char *my_path)
 			}
 		}
 	}
-	return command_found;
+	return (command_found);
 }
