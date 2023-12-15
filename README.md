@@ -50,11 +50,6 @@ $ ls -l
 ```bash
 $ ls -l
 ```
-- **Change Directory:**
-
-```bash
-$ cd /path/to/directory
-```
 - **Print Current Directory:**
 
 ```bash
