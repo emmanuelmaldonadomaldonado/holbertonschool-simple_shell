@@ -17,5 +17,10 @@ int tokenizer(char *command, char **argv)
 		token = strtok(NULL, " ");
 	}
 	argv[num_token] = NULL;
+	if (num_token == 0) /* Check for no arguments provided */
+	{
+		return (main());
+	}
+
 	return (num_token);
 }
